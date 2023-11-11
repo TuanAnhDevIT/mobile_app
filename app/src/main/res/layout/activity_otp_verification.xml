@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/welcome_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="vertical"
+        >
+
+        <!-- Back button -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_icon"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:background="@drawable/button_border"
+            />
+
+        <TextView
+            android:id="@+id/welcome_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OTP Verification"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/sub_welcome_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the verification code we just sent on your\nemail address."
+            android:textSize="16dp"
+            android:textColor="#8391A1"
+            android:layout_gravity="start"
+            android:layout_marginTop="10dp"
+            />
+
+    </LinearLayout>
+
+    <!-- View email_input với tỉ lệ 15% -->
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/email_password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- OTP EditText 1 -->
+            <EditText
+                android:id="@+id/otp1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:inputType="number"
+                android:maxLength="1"
+                android:gravity="center"
+                android:background="@drawable/edittext_border"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- OTP EditText 2 -->
+            <EditText
+                android:id="@+id/otp2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:inputType="number"
+                android:maxLength="1"
+                android:gravity="center"
+                android:background="@drawable/edittext_border"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- OTP EditText 3 -->
+            <EditText
+                android:id="@+id/otp3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:inputType="number"
+                android:maxLength="1"
+                android:gravity="center"
+                android:background="@drawable/edittext_border"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- OTP EditText 4 -->
+            <EditText
+                android:id="@+id/otp4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:inputType="number"
+                android:maxLength="1"
+                android:gravity="center"
+                android:background="@drawable/edittext_border"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <!-- View Login được định vị với tỉ lệ 20% -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        >
+        <Button
+            android:id="@+id/verify_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verify"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="22dp"
+            android:background="@drawable/custom_button_background"
+            />
+    </LinearLayout>
+
+    <!-- View trống được định vị với tỉ lệ 10% -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="5">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Didn't received code?"
+            android:textSize="16sp"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resend"
+            android:textSize="16sp"
+            android:layout_gravity="bottom"
+            android:textStyle="bold"
+            android:textColor="#35C2C1"
+            />
+    </LinearLayout>
+
+</LinearLayout>
