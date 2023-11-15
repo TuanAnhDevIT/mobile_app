@@ -44,6 +44,7 @@
 
             <!-- Thành phần 1: Nút Login -->
             <Button
+                android:id="@+id/btnNavLogin"
                 android:layout_width="331dp"
                 android:layout_height="60dp"
                 android:text="Login"
@@ -53,6 +54,7 @@
                 />
 
             <Button
+                android:id="@+id/btnNavRegister"
                 android:layout_width="331dp"
                 android:layout_height="60dp"
                 android:text="Register"
