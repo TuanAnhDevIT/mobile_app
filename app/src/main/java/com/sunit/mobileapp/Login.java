@@ -1,6 +1,7 @@
 package com.sunit.mobileapp;
 import static com.android.volley.Request.Method.POST;
 
+import com.sunit.mobileapp.Activities.HomeActivity;
 import  com.sunit.mobileapp.GetUserAutherization;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+
 public class Login extends AppCompatActivity {
 
     ImageButton buttonBack;
@@ -51,7 +53,7 @@ public class Login extends AppCompatActivity {
         textInputEditTextPassword = (TextInputEditText) findViewById(R.id.password_input);
         buttonBack = (ImageButton) findViewById(R.id.back_button);
         buttonLogin = (Button) findViewById(R.id.login_button);
-        String api = "https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token";
+        String api = "https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token";//getString(R.string.API);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,23 +92,13 @@ public class Login extends AppCompatActivity {
                 };
 
                 queue.add(stringRequest);
-
-                /*TokenRequestTask.TokenRequestParams params = new TokenRequestTask.TokenRequestParams(
-                        "https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token",
-                        textInputEditTextEmail.toString().trim(),
-                        textInputEditTextPassword.toString().trim()
-                );
-
-                TokenRequestTask.requestToken(params, new TokenRequestTask.TokenRequestListener() {
-                    @Override
-                    public void onTokenRequestComplete(String token) {
-                        Log.d("Token",token);
-                    }
-                });*/
-
-
+                //Intent intent = new Intent(Login.this, HomeActivity.class);
+               // startActivity(intent);
             }
-        });
+
+
+        }
+        );
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
