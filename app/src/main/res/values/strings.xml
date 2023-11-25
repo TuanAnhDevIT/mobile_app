@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mobile App</string>
-    <string name="john">John</string>
+    <string name="john">Tuan Anh</string>
     <string name="hello">Hello</string>
     <string name="search_elements">Search elements</string>
+    <string name="my_map_api_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA66KwUrjxcFG5u0exynlJ45CrbrNe3hEc</string>
 </resources>
