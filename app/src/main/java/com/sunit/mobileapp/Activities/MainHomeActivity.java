@@ -1,37 +1,37 @@
 package com.sunit.mobileapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.content.Intent;
 import android.widget.TextView;
 
 import com.sunit.mobileapp.Adapters.HourlyAdapter;
 import com.sunit.mobileapp.Domains.Hourly;
 import com.sunit.mobileapp.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MainHomeActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterHourly;
     private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainhome);
 
-        initRecyclerview();
-        setVaribles();
+        initRecyclerView();
+        setVariables();
     }
 
-    private void setVaribles() {
+    private void setVariables() {
         TextView next7daysBtn = findViewById(R.id.nextBtn);
-        next7daysBtn.setOnClickListener(v -> startActivity(new Intent(com.sunit.mobileapp.Activities.MainHomeActivity.this, FutureActivity.class)));
+        next7daysBtn.setOnClickListener(v -> startActivity(new Intent(MainHomeActivity.this, FutureActivity.class)));
     }
 
-    private void initRecyclerview() {
+    private void initRecyclerView() {
         ArrayList<Hourly> items = new ArrayList<>();
 
         items.add(new Hourly("9 pm", 28, "cloudy"));
