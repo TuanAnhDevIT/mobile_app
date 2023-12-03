@@ -20,6 +20,9 @@ public interface APIInterface {
 
     @GET("api/master/map")
     Call<JsonElement> getMapOptions();
+
+    @GET("api/master/asset/5zI6XqkQVSfdgOrZ1MyWEf")
+    Call<JsonElement> getDataAsset();
 }
 
 
