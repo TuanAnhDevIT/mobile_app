@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -49,28 +48,32 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     private void getDataAsset(){
-        APIInterface apiInterface1 = APIClient.getClient().create(APIInterface.class);
-        Call<JsonElement> call1 = apiInterface1.getDataAsset();
-
-        call1.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    JsonElement jsonElement = response.body();
-                    if (jsonElement.isJsonObject()) {
-                        JsonObject optionsObject = jsonElement.getAsJsonObject().getAsJsonObject("attributes").getAsJsonObject("");
-                        String name = optionsObject.get("name").getAsString();
-                        String value = optionsObject.get("value").getAsString();
-
-                }
-            }
-
+//        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+//        Call<JsonElement> call = apiInterface.getDataAsset();
+//
+//        call.enqueue(new Callback<JsonElement>() {
+//            @Override
+//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    J weatherAsset = response.body();
+//
+//                    // Trích xuất thông tin cần thiết
+//                    String assetName = weatherAsset.getName();
+//                    Double rainfallValue = weatherAsset.getAttributes().getRainfall().getValue();
+//
+//                    // Sử dụng thông tin theo ý muốn
+//                    // Ví dụ: Hiển thị thông báo Toast với tên và giá trị mưa
+//                    Toast.makeText(GoogleMap.this, "Asset Name: " + assetName + ", Rainfall: " + rainfallValue, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
 //            @Override
 //            public void onFailure(Call<WeatherAsset> call, Throwable t) {
 //                // Xử lý lỗi khi gọi API
 //                Log.e("getDataAsset", "Error getting data asset: " + t.getMessage());
 //            }
-        });
+//        });
+
     }
 
 
