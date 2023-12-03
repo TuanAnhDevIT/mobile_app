@@ -2,6 +2,7 @@ package com.sunit.mobileapp.api;
 
 
 import com.sunit.mobileapp.Model.Asset;
+import com.sunit.mobileapp.Model.MapOptions;
 import com.sunit.mobileapp.Model.Status;
 
 import retrofit2.Call;
@@ -19,6 +20,9 @@ public interface APIInterface {
 
     @GET("api/master/info")
     Call<Status> getStatus();//, @Header("Authorization") String auth);
+
+    @GET("api/master/map")
+    Call<MapOptions> getMapOptions();
 }
 
 
