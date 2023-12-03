@@ -10,7 +10,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sunit.mobileapp.Model.MapOptions;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.sunit.mobileapp.R;
 import com.sunit.mobileapp.api.APIClient;
 import com.sunit.mobileapp.api.APIInterface;
@@ -44,26 +45,26 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private void getMapOptions(){
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<MapOptions> call = apiInterface.getMapOptions();
+        Call<JsonElement> call = apiInterface.getMapOptions();
 
-        call.enqueue(new Callback<MapOptions>() {
+        call.enqueue(new Callback<JsonElement>() {
             @Override
-            public void onResponse(Call<MapOptions> call, Response<MapOptions> response) {
-                if (response.isSuccessful()) {
-                    MapOptions mapOptions = response.body();
-
-                    // Trích xuất thông tin từ mapOptions và cập nhật bản đồ
-                    if (mapOptions != null) {
-                        LatLng center = new LatLng(mapOptions.getOptions().getCenter()[1], mapOptions.getOptions().getCenter()[0]);
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonElement jsonElement = response.body();
+                    if (jsonElement.isJsonObject()) {
+                        JsonObject optionsObject = jsonElement.getAsJsonObject().getAsJsonObject("options").getAsJsonObject("default");
+                        LatLng center = new LatLng(optionsObject.getAsJsonArray("center").get(1).getAsDouble(), optionsObject.getAsJsonArray("center").get(0).getAsDouble());
+                        int zoom = optionsObject.get("zoom").getAsInt();
                         myMap.addMarker(new MarkerOptions().position(center).title("Điểm đánh dấu"));
-                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, mapOptions.getOptions().getZoom()));
+                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoom));
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<MapOptions> call, Throwable t) {
-                // Xử lý lỗi khi gọi API
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                // Handle API call failure
             }
         });
     }

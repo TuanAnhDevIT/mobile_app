@@ -1,15 +1,12 @@
 package com.sunit.mobileapp.api;
 
 
+import com.google.gson.JsonElement;
 import com.sunit.mobileapp.Model.Asset;
-import com.sunit.mobileapp.Model.MapOptions;
 import com.sunit.mobileapp.Model.Status;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface APIInterface {
@@ -22,7 +19,7 @@ public interface APIInterface {
     Call<Status> getStatus();//, @Header("Authorization") String auth);
 
     @GET("api/master/map")
-    Call<MapOptions> getMapOptions();
+    Call<JsonElement> getMapOptions();
 }
 
 
