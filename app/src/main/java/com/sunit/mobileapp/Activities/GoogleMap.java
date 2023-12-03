@@ -73,14 +73,12 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                                 JsonObject attributeObject = attributeValue.getAsJsonObject();
 
                                 // Lấy giá trị của thuộc tính name và value
-                                String name = attributeObject.get("name").getAsString();
+                                JsonElement name = attributeObject.get("name");
                                 JsonElement value = attributeObject.get("value");
 
                                 // Thêm thông tin vào chuỗi kết quả
                                 result.append("Name: ").append(name).append("\n");
                                 result.append("Value: ").append(value).append("\n");
-
-
                             }
                         }
                         Log.d("getDataAsset", result.toString());
