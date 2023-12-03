@@ -1,6 +1,9 @@
-package com.sunit.mobileapp;
+package com.sunit.mobileapp.Model;
+
+import com.google.gson.annotations.SerializedName;
 
 public class User {
+    @SerializedName("realm")
     public String realm;
     public String realmId;
     public String id;

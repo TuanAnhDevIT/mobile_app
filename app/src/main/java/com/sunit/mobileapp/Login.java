@@ -1,5 +1,8 @@
 package com.sunit.mobileapp;
 
+import static com.sunit.mobileapp.api.APIClient.getToken;
+import static com.sunit.mobileapp.api.APIClient.setToken;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -55,10 +58,11 @@ public class Login extends AppCompatActivity {
                                 try {
                                     JSONObject jsonResponse = new JSONObject(response);
                                     String accessToken = jsonResponse.getString("access_token");
+                                    setToken(accessToken);
                                     int expiresIn = jsonResponse.getInt("expires_in");
 
-                                    Log.d("Login", "Access Token: " + accessToken);
-                                    Toast.makeText(Login.this, "Access Token: " + accessToken, Toast.LENGTH_SHORT).show();
+                                    Log.d("Login", "Access Token: " + getToken());
+                                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                     // Chuyển sang màn hình GoogleMap (hoặc màn hình khác)
                                     Intent intent = new Intent(Login.this, GoogleMap.class);

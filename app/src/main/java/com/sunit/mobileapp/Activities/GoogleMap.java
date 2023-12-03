@@ -29,9 +29,9 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
         myMap = googleMap;
 
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(10.87, 106.80324);
         myMap.addMarker(new MarkerOptions().position(sydney).title("Sydney"));
-        myMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
 
     }
 }
