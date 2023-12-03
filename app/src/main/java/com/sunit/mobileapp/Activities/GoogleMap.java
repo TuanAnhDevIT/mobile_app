@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,7 +17,6 @@ import com.sunit.mobileapp.R;
 import com.sunit.mobileapp.api.APIClient;
 import com.sunit.mobileapp.api.APIInterface;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -42,9 +40,6 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
         myMap = googleMap;
 
-//        LatLng sydney = new LatLng(10.87, 106.80324);
-//        myMap.addMarker(new MarkerOptions().position(sydney).title("Sydney"));
-//        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
         getMapOptions();
         myMap.setOnMapClickListener(this::onMapClick);
     }
@@ -52,7 +47,9 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     getDataAsset();
     }
 
-    private void getDataAsset() {
+    private String getDataAsset() {
+        final StringBuilder result = new StringBuilder();
+
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<JsonElement> call = apiInterface.getDataAsset();
 
@@ -66,7 +63,27 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
                         JsonObject attributesObject = jsonObject.getAsJsonObject("attributes");
+                        System.out.println(attributesObject);
+                        for (Map.Entry<String, JsonElement> entry : attributesObject.entrySet()) {
+                            String attributeName = entry.getKey();
+                            JsonElement attributeValue = entry.getValue();
 
+                            // Kiểm tra nếu giá trị của thuộc tính là một đối tượng JSON
+                            if (attributeValue.isJsonObject()) {
+                                JsonObject attributeObject = attributeValue.getAsJsonObject();
+
+                                // Lấy giá trị của thuộc tính name và value
+                                String name = attributeObject.get("name").getAsString();
+                                JsonElement value = attributeObject.get("value");
+
+                                // Thêm thông tin vào chuỗi kết quả
+                                result.append("Name: ").append(name).append("\n");
+                                result.append("Value: ").append(value).append("\n");
+
+
+                            }
+                        }
+                        Log.d("getDataAsset", result.toString());
                     }
                 }
             }
@@ -77,6 +94,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                 Log.e("getDataAsset", "Error getting data asset: " + t.getMessage());
             }
         });
+
+        return result.toString();
     }
 
 
