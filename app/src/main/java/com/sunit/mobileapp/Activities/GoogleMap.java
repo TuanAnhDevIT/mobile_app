@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,6 +17,9 @@ import com.google.gson.JsonObject;
 import com.sunit.mobileapp.R;
 import com.sunit.mobileapp.api.APIClient;
 import com.sunit.mobileapp.api.APIInterface;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,37 +49,36 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         myMap.setOnMapClickListener(this::onMapClick);
     }
     public void onMapClick(LatLng latLng) {
-
+    getDataAsset();
     }
 
-    private void getDataAsset(){
-//        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-//        Call<JsonElement> call = apiInterface.getDataAsset();
-//
-//        call.enqueue(new Callback<JsonElement>() {
-//            @Override
-//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    J weatherAsset = response.body();
-//
-//                    // Trích xuất thông tin cần thiết
-//                    String assetName = weatherAsset.getName();
-//                    Double rainfallValue = weatherAsset.getAttributes().getRainfall().getValue();
-//
-//                    // Sử dụng thông tin theo ý muốn
-//                    // Ví dụ: Hiển thị thông báo Toast với tên và giá trị mưa
-//                    Toast.makeText(GoogleMap.this, "Asset Name: " + assetName + ", Rainfall: " + rainfallValue, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<WeatherAsset> call, Throwable t) {
-//                // Xử lý lỗi khi gọi API
-//                Log.e("getDataAsset", "Error getting data asset: " + t.getMessage());
-//            }
-//        });
+    private void getDataAsset() {
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<JsonElement> call = apiInterface.getDataAsset();
 
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonElement jsonElement = response.body();
+
+                    if (jsonElement.isJsonObject()) {
+                        JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+                        JsonObject attributesObject = jsonObject.getAsJsonObject("attributes");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                // Handle API call failure
+                Log.e("getDataAsset", "Error getting data asset: " + t.getMessage());
+            }
+        });
     }
+
 
 
     private void getMapOptions(){
@@ -90,6 +94,7 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                         JsonObject optionsObject = jsonElement.getAsJsonObject().getAsJsonObject("options").getAsJsonObject("default");
                         LatLng center = new LatLng(optionsObject.getAsJsonArray("center").get(1).getAsDouble(), optionsObject.getAsJsonArray("center").get(0).getAsDouble());
                         int zoom = optionsObject.get("zoom").getAsInt();
+
                         myMap.addMarker(new MarkerOptions().position(center).title("Điểm đánh dấu"));
                         myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoom));
                     }
