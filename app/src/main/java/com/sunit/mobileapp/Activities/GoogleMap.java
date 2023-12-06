@@ -38,6 +38,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private LinearLayout deviceInfoField;
 
+    private boolean isDeviceInfoFieldVisible = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,25 +49,18 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Initialize TextView
         deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
 
-        // Khởi tạo LinearLayout
         deviceInfoField = findViewById(R.id.deviceInfoField);
         deviceInfoField.setVisibility(View.GONE);
 
         deviceInfoField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isDeviceInfoFieldVisible = false;
-                // Chuyển đổi sự hiển thị của deviceInfoField khi được nhấp
                 isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
                 deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
             }
         });
-
-        // Initialize TextView
-        deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
     }
 
     @Override
@@ -78,7 +73,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapClick(LatLng latLng) {
 
         getDataAsset();
-        deviceInfoField.setVisibility(View.VISIBLE);
+        isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
+        deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
     }
 
     private void updateDeviceInfo(List<String> attributeNames, List<String> attributeValues) {
@@ -92,11 +88,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
 
-        // Update the TextView with device information
         deviceInfoTextView.setText(deviceInfo.toString());
 
-        // Show the TextView
-        deviceInfoTextView.setVisibility(View.VISIBLE);
     }
 
 
@@ -127,10 +120,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                             attributeNames.add(attributeName);
                             attributeValues.add(attributeValue);
                         }
-//                        Log.d("getDataAsset", attributeInfo.toString());
-                        Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
-                        Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
-
+//                        Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
+//                        Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
                         updateDeviceInfo(attributeNames,attributeValues);
                     }
                 }
