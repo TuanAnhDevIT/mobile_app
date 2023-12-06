@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,7 +21,10 @@ import com.sunit.mobileapp.R;
 import com.sunit.mobileapp.api.APIClient;
 import com.sunit.mobileapp.api.APIInterface;
 
+import java.io.CharArrayWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -28,6 +34,8 @@ import retrofit2.Response;
 public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private com.google.android.gms.maps.GoogleMap myMap;
+    private TextView deviceInfoTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +43,52 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Initialize TextView
+        deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
+        deviceInfoTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // Hide the TextView when clicked
+                v.setVisibility(View.GONE);
+            }
+        });
+
+        // Initialize TextView
+        deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
     }
 
     @Override
     public void onMapReady(@NonNull com.google.android.gms.maps.GoogleMap googleMap) {
 
         myMap = googleMap;
-
-//        LatLng sydney = new LatLng(10.87, 106.80324);
-//        myMap.addMarker(new MarkerOptions().position(sydney).title("Sydney"));
-//        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
         getMapOptions();
         myMap.setOnMapClickListener(this::onMapClick);
     }
     public void onMapClick(LatLng latLng) {
-    getDataAsset();
+
+        getDataAsset();
+//        findViewById(R.id.deviceInfoField).setVisibility(View.INVISIBLE);
     }
+
+    private void updateDeviceInfo(List<String> attributeNames, List<String> attributeValues) {
+        StringBuilder deviceInfo = new StringBuilder();
+        for (int i = 0; i < attributeNames.size(); i++) {
+            String attributeName = attributeNames.get(i);
+            String attributeValue = attributeValues.get(i);
+
+            if (attributeValue != null) {
+                deviceInfo.append(attributeName).append(": ").append(attributeValue).append("\n");
+            }
+        }
+
+        // Update the TextView with device information
+        deviceInfoTextView.setText(deviceInfo.toString());
+
+        // Show the TextView
+        deviceInfoTextView.setVisibility(View.VISIBLE);
+    }
+
 
     private void getDataAsset() {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
@@ -67,14 +105,23 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
                         JsonObject attributesObject = jsonObject.getAsJsonObject("attributes");
 
+//                        StringBuilder attributeInfo = new StringBuilder();
+                        List<String> attributeNames = new ArrayList<>();
+                        List<String> attributeValues = new ArrayList<>();
+
                         for (Map.Entry<String, JsonElement> entry : attributesObject.entrySet()) {
                             String attributeName = entry.getKey();
                             JsonElement attributeValueElement = entry.getValue().getAsJsonObject().get("value");
                             String attributeValue = (attributeValueElement != null && attributeValueElement.isJsonPrimitive()) ?
                                     attributeValueElement.getAsString() : null;
-                            Log.d("Attribute", "Attribute Name: " + attributeName);
-                            Log.d("Attribute", "Attribute Value: " + attributeValue);
+                            attributeNames.add(attributeName);
+                            attributeValues.add(attributeValue);
                         }
+//                        Log.d("getDataAsset", attributeInfo.toString());
+                        Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
+                        Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
+
+                        updateDeviceInfo(attributeNames,attributeValues);
                     }
                 }
             }
