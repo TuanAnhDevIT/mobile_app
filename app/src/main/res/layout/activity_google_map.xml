@@ -43,6 +43,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="40"
                 android:orientation="vertical"
+                android:visibility="visible"
                 >
 
                 <LinearLayout
@@ -75,10 +76,11 @@
                         android:id="@+id/deviceInfoTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingLeft="20dp"
+                        android:paddingBottom="16dp"
                         android:text=""
-                        android:textSize="16sp"
-                        android:visibility="gone"
+                        android:textSize="18sp"
                         />
                 </LinearLayout>
 

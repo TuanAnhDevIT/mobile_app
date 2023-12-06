@@ -36,21 +36,31 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     private com.google.android.gms.maps.GoogleMap myMap;
     private TextView deviceInfoTextView;
 
+    private LinearLayout deviceInfoField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         // Initialize TextView
         deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
-        deviceInfoTextView.setOnClickListener(new View.OnClickListener(){
+
+        // Khởi tạo LinearLayout
+        deviceInfoField = findViewById(R.id.deviceInfoField);
+        deviceInfoField.setVisibility(View.GONE);
+
+        deviceInfoField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Hide the TextView when clicked
-                v.setVisibility(View.GONE);
+                boolean isDeviceInfoFieldVisible = false;
+                // Chuyển đổi sự hiển thị của deviceInfoField khi được nhấp
+                isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
+                deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
             }
         });
 
@@ -68,7 +78,7 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapClick(LatLng latLng) {
 
         getDataAsset();
-//        findViewById(R.id.deviceInfoField).setVisibility(View.INVISIBLE);
+        deviceInfoField.setVisibility(View.VISIBLE);
     }
 
     private void updateDeviceInfo(List<String> attributeNames, List<String> attributeValues) {
