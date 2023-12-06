@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,9 +22,7 @@ import com.sunit.mobileapp.R;
 import com.sunit.mobileapp.api.APIClient;
 import com.sunit.mobileapp.api.APIInterface;
 
-import java.io.CharArrayWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +33,9 @@ import retrofit2.Response;
 public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private com.google.android.gms.maps.GoogleMap myMap;
-    private TextView deviceInfoTextView;
+    private TextView deviceInfoTextViewName;
+
+    private TextView deviceInfoTextViewValue;
 
     private LinearLayout deviceInfoField;
 
@@ -55,7 +53,9 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        deviceInfoTextView = findViewById(R.id.deviceInfoTextView);
+        deviceInfoTextViewName = findViewById(R.id.deviceInfoTextViewName);
+        deviceInfoTextViewValue = findViewById(R.id.deviceInfoTextViewValue);
+
 
         deviceInfoField = findViewById(R.id.deviceInfoField);
         deviceInfoField.setVisibility(View.GONE);
@@ -96,25 +96,27 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
             isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
             deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
         } else {
-            Toast.makeText(this, "Bạn chưa nhấn vào tọa độ thiết bị", Toast.LENGTH_SHORT).show();
+            deviceInfoField.setVisibility(View.GONE);
         }
     }
 
     private void updateDeviceInfo(List<String> attributeNames, List<String> attributeValues) {
-        StringBuilder deviceInfo = new StringBuilder();
+        StringBuilder deviceInfoName = new StringBuilder();
+        StringBuilder deviceInfoValue = new StringBuilder();
+
         for (int i = 0; i < attributeNames.size(); i++) {
             String attributeName = attributeNames.get(i);
             String attributeValue = attributeValues.get(i);
 
-            if (attributeValue != null) {
-                deviceInfo.append(attributeName).append(": ").append(attributeValue).append("\n");
-            }
+            deviceInfoName.append(attributeName).append(": ").append("\n");
+            deviceInfoValue.append(attributeValue).append("\n");
+
         }
 
-        deviceInfoTextView.setText(deviceInfo.toString());
+        deviceInfoTextViewName.setText(deviceInfoName.toString());
+        deviceInfoTextViewValue.setText(deviceInfoValue.toString());
 
     }
-
 
     private void getDataAsset() {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
@@ -143,9 +145,10 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                             attributeNames.add(attributeName);
                             attributeValues.add(attributeValue);
                         }
-//                        Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
-//                        Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
-                        updateDeviceInfo(attributeNames,attributeValues);
+
+                        Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
+                        Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
+                        updateDeviceInfo(attributeNames, attributeValues);
                     }
                 }
             }
@@ -175,7 +178,6 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                         int zoom = optionsObject.get("zoom").getAsInt();
 
                         myMap.addMarker(new MarkerOptions().position(centerCoordinate).title("Điểm đánh dấu"));
-//                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoom));
                         myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerCoordinate, zoom));
                     }
                 }
