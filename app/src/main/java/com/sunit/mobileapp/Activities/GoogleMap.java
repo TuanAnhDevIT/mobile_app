@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,9 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     private LinearLayout deviceInfoField;
 
     private boolean isDeviceInfoFieldVisible = false;
+
+    // Tọa độ trung tâm toàn cục
+    private LatLng centerCoordinate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +87,17 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         myMap.setOnMapClickListener(this::onMapClick);
     }
     public void onMapClick(LatLng latLng) {
+    // Kiểm tra khoảng cách giữa latLng và centerCoordinate
+        float[] results = new float[1];
+        Location.distanceBetween(latLng.latitude, latLng.longitude, centerCoordinate.latitude, centerCoordinate.longitude, results);
 
-        getDataAsset();
-        isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
-        deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
+        if (results[0] < 90) {
+            getDataAsset();
+            isDeviceInfoFieldVisible = !isDeviceInfoFieldVisible;
+            deviceInfoField.setVisibility(isDeviceInfoFieldVisible ? View.VISIBLE : View.GONE);
+        } else {
+            Toast.makeText(this, "Bạn chưa nhấn vào tọa độ thiết bị", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateDeviceInfo(List<String> attributeNames, List<String> attributeValues) {
@@ -160,11 +171,12 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                     JsonElement jsonElement = response.body();
                     if (jsonElement.isJsonObject()) {
                         JsonObject optionsObject = jsonElement.getAsJsonObject().getAsJsonObject("options").getAsJsonObject("default");
-                        LatLng center = new LatLng(optionsObject.getAsJsonArray("center").get(1).getAsDouble(), optionsObject.getAsJsonArray("center").get(0).getAsDouble());
+                        centerCoordinate = new LatLng(optionsObject.getAsJsonArray("center").get(1).getAsDouble(), optionsObject.getAsJsonArray("center").get(0).getAsDouble());
                         int zoom = optionsObject.get("zoom").getAsInt();
 
-                        myMap.addMarker(new MarkerOptions().position(center).title("Điểm đánh dấu"));
-                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoom));
+                        myMap.addMarker(new MarkerOptions().position(centerCoordinate).title("Điểm đánh dấu"));
+//                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, zoom));
+                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerCoordinate, zoom));
                     }
                 }
             }
