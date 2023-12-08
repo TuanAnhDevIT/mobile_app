@@ -4,4 +4,16 @@
     <string name="hello">Hello</string>
     <string name="search_elements">Search elements</string>
     <string name="my_map_api_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA66KwUrjxcFG5u0exynlJ45CrbrNe3hEc</string>
+    <string name="home">Home</string>
+    <string name="graph">Graph</string>
+    <string name="location">Location</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mostly_cloudy">Mostly Cloudy</string>
+    <string name="_30">30°</string>
+    <string name="rainfall_mm">Rainfall (mm)</string>
+    <string name="humidity">Humidity (%)</string>
+    <string name="wind_speed_km_h">Wind speed (km/h)</string>
+    <string name="attribute_names">Attribute Names:</string>
 </resources>

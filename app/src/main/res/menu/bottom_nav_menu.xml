@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/home_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/home"
+        android:icon="@drawable/baseline_home_24"/>
+    <item
+        android:id="@+id/graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/graph"
+        android:icon="@drawable/baseline_area_chart_24"
+        android:iconTint="@color/black"/>
+    <item
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/location"
+        android:icon="@drawable/baseline_place_24"
+        android:iconTint="@color/black" />
+    <item
+        android:id="@+id/setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/settings"
+        android:icon="@drawable/baseline_settings_suggest_24"
+        android:iconTint="@color/black"/>
+</menu>
