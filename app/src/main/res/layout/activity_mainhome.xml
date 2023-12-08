@@ -39,7 +39,7 @@
                 android:src="@drawable/cloudy_sunny" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -49,10 +49,10 @@
                 android:layout_marginTop="8dp"/>
 
             <TextView
-                android:id="@+id/textViewTemperature"
+                android:id="@+id/textViewTemperatureData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="30°"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="63dp"
                 android:textStyle="bold"
@@ -163,16 +163,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/attributeNamesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Attribute Names: "
-                android:textSize="18sp" />
-
-
 
         </LinearLayout>
     </ScrollView>

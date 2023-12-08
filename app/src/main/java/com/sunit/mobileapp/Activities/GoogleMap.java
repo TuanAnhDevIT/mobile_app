@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.sunit.mobileapp.R;
@@ -40,6 +41,12 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
     private LinearLayout deviceInfoField;
 
     private boolean isDeviceInfoFieldVisible = false;
+
+    private List<String> attributeNames;
+
+    private List<String> attributeValues;
+
+
 
     // Tọa độ trung tâm toàn cục
     private LatLng centerCoordinate;
@@ -74,6 +81,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
             public void onClick(View v) {
                 // Chuyển hướng sang MainHomeActivity
                 Intent intent = new Intent(GoogleMap.this,MainHomeActivity.class);
+                intent.putStringArrayListExtra("attributeNames", (ArrayList<String>) attributeNames);
+                intent.putStringArrayListExtra("attributeValues", (ArrayList<String>) attributeValues);
                 startActivity(intent);
             }
         });
@@ -133,9 +142,11 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
                         JsonObject attributesObject = jsonObject.getAsJsonObject("attributes");
 
-//                        StringBuilder attributeInfo = new StringBuilder();
-                        List<String> attributeNames = new ArrayList<>();
-                        List<String> attributeValues = new ArrayList<>();
+//                        List<String> attributeNames = new ArrayList<>();
+//                        List<String> attributeValues = new ArrayList<>();
+
+                        GoogleMap.this.attributeNames = new ArrayList<>();
+                        GoogleMap.this.attributeValues = new ArrayList<>();
 
                         for (Map.Entry<String, JsonElement> entry : attributesObject.entrySet()) {
                             String attributeName = entry.getKey();
@@ -148,7 +159,7 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
 
                         Log.d("getDataAsset", "Attribute Names: " + attributeNames.toString());
                         Log.d("getDataAsset", "Attribute Values: " + attributeValues.toString());
-                        updateDeviceInfo(attributeNames, attributeValues);
+                        updateDeviceInfo(GoogleMap.this.attributeNames, GoogleMap.this.attributeValues);
                     }
                 }
             }
