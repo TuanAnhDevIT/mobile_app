@@ -2,9 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#7FFFD4</color>
+    <color name="blue_light">#ADD8E6</color>
 
     <color name="colorPrimary">#2BCC6F</color>
-    <color name="colorPrimaryDark">#2BCC6F</color>
+    <color name="colorPrimaryDark">@color/material_dynamic_primary10</color>
     <color name="colorAccent">#333333</color>
     <color name="colorPrimaryLight">#E9F8F1</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -12,4 +14,5 @@
     <color name="colorTrendingStart">#00B098</color>
     <color name="colorTrendingEnd">#96C93D</color>
     <color name="colorDivider">#D6D6D6</color>
+    <color name="test">#009688</color>
 </resources>
