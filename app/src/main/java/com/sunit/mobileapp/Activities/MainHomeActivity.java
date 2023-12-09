@@ -43,6 +43,7 @@ public class MainHomeActivity extends AppCompatActivity {
             String humidityVallue  = attributeValues.get(9);
             String windspeedValue = attributeValues.get(13);
             String temperatureValue = attributeValues.get(8);
+            String textViewPlaceValue = attributeValues.get(11);
             if (temperatureValue != null) {
                 temperatureValue += "°";
             }
@@ -51,11 +52,13 @@ public class MainHomeActivity extends AppCompatActivity {
             TextView textViewHumidityData = findViewById(R.id.textViewHumidityData);
             TextView textViewWindspeedData = findViewById(R.id.textViewWindspeedData);
             TextView textViewTemperatureData = findViewById(R.id.textViewTemperatureData);
+            TextView textViewPlace = findViewById(R.id.textViewPlace);
 
             textViewRainfallData.setText(rainfallValue);
             textViewHumidityData.setText(humidityVallue);
             textViewWindspeedData.setText(windspeedValue);
             textViewTemperatureData.setText(temperatureValue);
+            textViewPlace.setText(textViewPlaceValue);
         }
 
     }
