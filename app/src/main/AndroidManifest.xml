@@ -9,34 +9,31 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MobileApp"
-        tools:targetApi="31"
-        android:networkSecurityConfig="@xml/network_security_config"
-        >
-
-        <activity android:name=".Activities.MainHomeActivity"
-            android:exported="true">
-
-
-        </activity>
-
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".Activities.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainHomeActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".Activities.GoogleMap"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".WevViewRegister"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".PasswordChanged"
             android:exported="false" />
@@ -48,7 +45,7 @@
             android:exported="true" />
         <activity
             android:name=".ForgotPassword"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Register"
             android:exported="true" />
