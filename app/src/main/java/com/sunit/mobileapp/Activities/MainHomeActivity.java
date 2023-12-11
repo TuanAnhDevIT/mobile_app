@@ -75,6 +75,9 @@ public class MainHomeActivity extends AppCompatActivity {
                 temperatureValue += "°";
             }
 
+            double rainfallAmount = Double.parseDouble(rainfallValue);
+            predictRainLevel(rainfallAmount);
+
             TextView textViewRainfallData = findViewById(R.id.textViewRainfallData);
             TextView textViewHumidityData = findViewById(R.id.textViewHumidityData);
             TextView textViewWindspeedData = findViewById(R.id.textViewWindspeedData);
@@ -86,9 +89,38 @@ public class MainHomeActivity extends AppCompatActivity {
             textViewWindspeedData.setText(windspeedValue);
             textViewTemperatureData.setText(temperatureValue);
             textViewPlace.setText(textViewPlaceValue);
+
         }
 
     }
+
+    private String predictRainLevel(double rainfallAmount) {
+        String rainLevel = "";
+
+        if (rainfallAmount == 0) {
+            rainLevel = "no rain";
+        } else if (rainfallAmount <= 0.3) {
+            rainLevel = "light rain, insignificant rainfall";
+        } else if (rainfallAmount <= 3.0) {
+            rainLevel = "light rain";
+        } else if (rainfallAmount <= 8.0) {
+            rainLevel = "moderate rain";
+        } else if (rainfallAmount <= 25.0) {
+            rainLevel = "heavy rain";
+        } else if (rainfallAmount <= 50.0) {
+            rainLevel = "very heavy rain";
+        } else {
+            rainLevel = "extremely heavy rain";
+        }
+
+        // Set the result in the TextView with ID textViewResult
+        TextView textViewResult = findViewById(R.id.textViewResult);
+        textViewResult.setText(rainLevel);
+
+        // Return the result string or adjust as needed
+        return "rainfall Level: " + rainLevel;
+    }
+
 
     private Runnable runnable = new Runnable() {
         @Override
