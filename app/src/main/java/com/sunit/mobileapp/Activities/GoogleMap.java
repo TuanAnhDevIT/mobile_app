@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -56,6 +57,41 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
 
+        ///Nav bar
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.location_menu);
+
+        bottomNavigationView.setOnItemReselectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.location_menu) {
+                return ;
+            } else if (itemId == R.id.graph_menu) {
+                startActivity(new Intent(getApplicationContext(), GraphTestActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return ;
+            } else if (itemId == R.id.home_menu) {
+                // Tạo Intent và đặt dữ liệu
+                Intent intent = new Intent(getApplicationContext(), MainHomeActivity.class);
+                intent.putStringArrayListExtra("attributeNames", (ArrayList<String>) attributeNames);
+                intent.putStringArrayListExtra("attributeValues", (ArrayList<String>) attributeValues);
+
+                // Chuyển hướng và thêm animation
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                // Kết thúc activity hiện tại
+                finish();
+                return ;
+            } else if (itemId == R.id.setting_menu) {
+                startActivity(new Intent(getApplicationContext(), SettingTestActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return ;
+            }
+            return ;
+        });
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -86,6 +122,8 @@ public class GoogleMap extends AppCompatActivity implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override

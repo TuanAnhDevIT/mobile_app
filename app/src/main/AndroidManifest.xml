@@ -23,14 +23,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.BaseActivity"
+            android:name=".Activities.SettingTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.GraphTestActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainHomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activities.GoogleMap"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".WevViewRegister"
             android:exported="true" />
