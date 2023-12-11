@@ -9,7 +9,7 @@ tools:context=".Activities.SettingTestActivity">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Search"
+    android:text="Setting"
     android:textColor="@color/lavender"
     android:layout_centerInParent="true"
     android:textSize="36sp" />
