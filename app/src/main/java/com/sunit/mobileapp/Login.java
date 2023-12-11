@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
         textInputEditTextEmail = findViewById(R.id.email_input);
         textInputEditTextPassword = findViewById(R.id.password_input);
         buttonLogin = findViewById(R.id.login_button);
-        String api = "https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token";
+        String api = getString(R.string.LoginAPI);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
