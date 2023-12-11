@@ -16,4 +16,5 @@
     <string name="humidity">Humidity (%)</string>
     <string name="wind_speed_km_h">Wind speed (km/h)</string>
     <string name="attribute_names">Attribute Names:</string>
+    <string name="dark_mode">Dark mode</string>
 </resources>
