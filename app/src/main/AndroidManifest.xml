@@ -22,6 +22,7 @@
         android:theme="@style/Theme.MobileApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".Activities.SettingTestActivity"
             android:exported="false" />
@@ -55,8 +56,12 @@
         <activity
             android:name=".Login"
             android:exported="true" />
+
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.OnboardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
