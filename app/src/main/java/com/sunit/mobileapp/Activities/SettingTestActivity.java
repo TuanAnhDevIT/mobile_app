@@ -4,14 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.sunit.mobileapp.Login;
+import com.sunit.mobileapp.Model.User;
 import com.sunit.mobileapp.R;
+import com.sunit.mobileapp.api.APIClient;
+import com.sunit.mobileapp.api.APIInterface;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SettingTestActivity extends AppCompatActivity {
 
@@ -22,6 +36,25 @@ public class SettingTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting_test);
 
         Button btnLogout = findViewById(R.id.btnLogout);
+        TextView textViewUserName = findViewById(R.id.tv_settings);
+
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<User> call = apiInterface.getInfor();
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User user = response.body();
+                    textViewUserName.setText("Hello " + user.firstName + " " + user.lastName);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

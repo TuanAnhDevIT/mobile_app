@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="attibutes">
+        <item>Humidity (%)</item>
+        <item>Rainfall (mm)</item>
+        <item>Temperature (C)</item>
+        <item>Windspeed (km/h)</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="timeframe">
+        <item>Hour</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+        <!-- Add more items as needed -->
+    </string-array>
+</resources>

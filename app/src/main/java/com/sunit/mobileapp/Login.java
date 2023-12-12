@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
+    ImageButton buttonBack;
     TextInputEditText textInputEditTextEmail;
     TextInputEditText textInputEditTextPassword;
     Button buttonLogin;
@@ -39,11 +41,20 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         textInputEditTextEmail = findViewById(R.id.email_input);
         textInputEditTextPassword = findViewById(R.id.password_input);
+
+        buttonBack = (ImageButton) findViewById(R.id.back_button);
         buttonLogin = findViewById(R.id.login_button);
         String api = getString(R.string.LoginAPI);
 
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
