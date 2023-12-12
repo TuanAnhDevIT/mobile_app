@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sunit.mobileapp.Login;
 import com.sunit.mobileapp.R;
 
 public class SettingTestActivity extends AppCompatActivity {
@@ -17,6 +20,24 @@ public class SettingTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_test);
+
+        Button btnLogout = findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Thực hiện đăng xuất ở đây, có thể làm các xử lý cần thiết
+
+                // Hiển thị thông báo "Logout successfully"
+                Toast.makeText(SettingTestActivity.this, "Logout successfully", Toast.LENGTH_SHORT).show();
+
+                // Sau khi đăng xuất, chuyển đến trang login
+                Intent intent = new Intent(SettingTestActivity.this, Login.class);
+                // Đặt cờ để xóa hết các Activity khác và tạo mới LoginActivity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);

@@ -17,4 +17,15 @@
     <string name="wind_speed_km_h">Wind speed (km/h)</string>
     <string name="attribute_names">Attribute Names:</string>
     <string name="dark_mode">Dark mode</string>
+    <string name="logout">Logout</string>
+    <string name="setting">Setting</string>
+    <string name="explore_a_healthier_lifestyle">Explore a Healthier Lifestyle</string>
+    <string name="where_health_meets">Where health meets the air you breathe – choose Air Quality for a smarter and healthier lifestyle.</string>
+    <string name="get_start">Get Start</string>
+    <string name="welcome_to_air_quality_">Welcome to Air Quality,\n your go-to application for real-time\n monitoring of air quality in your surroundings</string>
+    <string name="discover_real_time_insights">Discover Real-Time Insights</string>
+    <string name="empower_your_well_being">Empower Your Well-being</string>
+    <string name="stay_updated_on_">Stay updated on air health,\n track changes, and proactively\n improve your living environment</string>
+    <string name="hi">Hi, User!</string>
+    <string name="hi_user">Hi, User!</string>
 </resources>

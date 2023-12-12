@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Discover Real-Time Insights"
+        android:text="@string/discover_real_time_insights"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Air Quality,\n your go-to application for real-time\n monitoring of air quality in your surroundings"
+        android:text="@string/welcome_to_air_quality_"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textStyle="italic"

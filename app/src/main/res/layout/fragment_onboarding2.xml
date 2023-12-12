@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Empower Your Well-being"
+        android:text="@string/empower_your_well_being"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stay updated on air health,\n track changes, and proactively\n improve your living environment"
+        android:text="@string/stay_updated_on_"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/black"
