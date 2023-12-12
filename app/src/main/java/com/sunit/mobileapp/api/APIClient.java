@@ -30,6 +30,10 @@ public class APIClient {
     }
 
     private static String token= getToken();
+
+    public static void clearToken() {
+        token = null;
+    }
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
