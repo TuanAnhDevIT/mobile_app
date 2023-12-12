@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -94,8 +95,41 @@ public class MainHomeActivity extends AppCompatActivity {
 
     }
 
+    private void setImageViewBasedOnRainLevel(String rainLevel) {
+        ImageView imageView = findViewById(R.id.imageView);
+        int srcImage;
+
+        // Map rainLevel to the corresponding image resource
+        switch (rainLevel) {
+            case "no rain":
+                srcImage = R.drawable.sunny;
+                break;
+            case "light rain, insignificant rainfall":
+                srcImage = R.drawable.cloudy_sunny;
+                break;
+            case "light rain":
+                srcImage = R.drawable.cloudy;
+                break;
+            case "moderate rain":
+            case "heavy rain":
+            case "very heavy rain":
+                srcImage = R.drawable.rainy;
+                break;
+            case "extremely heavy rain":
+                srcImage = R.drawable.storm;
+                break;
+            default:
+                // Default image resource if the rain level is not recognized
+                srcImage = R.drawable.cloudy_sunny;
+                break;
+        }
+
+        // Set the src attribute of the ImageView
+        imageView.setImageResource(srcImage);
+    }
+
     private String predictRainLevel(double rainfallAmount) {
-        String rainLevel = "";
+        String rainLevel;
 
         if (rainfallAmount == 0) {
             rainLevel = "no rain";
@@ -116,6 +150,9 @@ public class MainHomeActivity extends AppCompatActivity {
         // Set the result in the TextView with ID textViewResult
         TextView textViewResult = findViewById(R.id.textViewResult);
         textViewResult.setText(rainLevel);
+
+        // Set the ImageView based on the rain level
+        setImageViewBasedOnRainLevel(rainLevel);
 
         // Return the result string or adjust as needed
         return "rainfall Level: " + rainLevel;
