@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical">
-
+    <WebView
+        android:id="@+id/register_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
     <LinearLayout
         android:id="@+id/welcome_header"
         android:layout_width="match_parent"
@@ -184,6 +188,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
+
 
                 <!-- Facebook Logo -->
                 <ImageView

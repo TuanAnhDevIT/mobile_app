@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="API">https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token</string>
+    <string name="LoginAPI">https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/token</string>
     <string name="GetUserDetail">https://uiot.ixxc.dev/api/master/user/user</string>
+    <string name="WebLoginURL">https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/registrations</string>
+    <string name="ClientID">openremote</string>
+    <string name="RedirectURI">https%3A%2F%2Fuiot.ixxc.dev%2Fmanager%2F</string>
 </resources>
